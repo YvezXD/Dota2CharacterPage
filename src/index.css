@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-obsidian: #0b0e14;
+    --color-slate-card: #131722;
+    --color-slate-hover: #1c2230;
+    --color-slate-border: #232a3b;
+    --color-radiant-gold: #e2b76b;
+    --color-radiant-gold-light: #f5d491;
+    --color-dire-crimson: #ff4b4b;
+    --color-dire-crimson-dark: #b82b2b;
+    --color-str-red: #ec3d3d;
+    --color-agi-green: #2ecc71;
+    --color-int-blue: #00d2ff;
+    --color-uni-purple: #df53f3;
+  }
+
+  body {
+    background-color: #0b0e14;
+    color: #e2e8f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbar for immersive dark feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232a3b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e2b76b;
+}
+
+/* Radiant glow and Dire pulse effects */
+.radiant-glow {
+  box-shadow: 0 0 20px rgba(226, 183, 107, 0.15);
+}
+
+.radiant-border {
+  border-color: rgba(226, 183, 107, 0.4);
+}
+
+.dire-glow {
+  box-shadow: 0 0 20px rgba(255, 75, 75, 0.2);
+}
+
+.dire-border {
+  border-color: rgba(255, 75, 75, 0.4);
+}
+
+/* Glass card styling */
+.dota-card {
+  background: #131722;
+  border: 1px solid #232a3b;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dota-card:hover {
+  border-color: #e2b76b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.6), 0 0 15px rgba(226, 183, 107, 0.12);
+}
