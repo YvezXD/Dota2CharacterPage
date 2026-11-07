@@ -1,17 +1,41 @@
+/**
+ * ==============================================================================
+ * GLOBAL DOTA CONTEXT & STATE PROVIDER (src/context/DotaContext.jsx)
+ * ==============================================================================
+ * WHAT THIS FILE DOES:
+ * Manages shared application state so any component can access:
+ * 1. `heroes` - The list of 127 Dota 2 heroes fetched from OpenDota API.
+ * 2. `loading` & `error` - Network loading spinner and error states.
+ * 3. `favorites` - Bookmarked hero IDs saved in browser `localStorage`.
+ * 4. `savedPrompts` - Custom AI prompts saved in browser `localStorage`.
+ * 5. `recentSearches` - Clickable recent search terms saved in `localStorage`.
+ *
+ * HOW TO USE IN ANY COMPONENT:
+ * import { useDota } from '../context/DotaContext';
+ * const { heroes, favorites, toggleFavorite } = useDota();
+ * ==============================================================================
+ */
+
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { fetchHeroStats } from '../services/opendota';
 import { STORAGE_KEYS } from '../constants/dotaConstants';
+import { APP_CONFIG } from '../config/appConfig';
 
 const DotaContext = createContext(null);
 
 export function DotaProvider({ children }) {
+  // ---------------------------------------------------------------------------
+  // 1. API & UI STATES
+  // ---------------------------------------------------------------------------
   const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [simulateError, setSimulateError] = useState(false);
   const [isReadmeOpen, setIsReadmeOpen] = useState(false);
 
-  // Local Storage: Favorite Hero IDs
+  // ---------------------------------------------------------------------------
+  // 2. LOCALSTORAGE STATE: FAVORITE HEROES
+  // ---------------------------------------------------------------------------
   const [favorites, setFavorites] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.FAVORITES);
@@ -21,7 +45,9 @@ export function DotaProvider({ children }) {
     }
   });
 
-  // Local Storage: Saved AI Prompts
+  // ---------------------------------------------------------------------------
+  // 3. LOCALSTORAGE STATE: SAVED AI PROMPTS
+  // ---------------------------------------------------------------------------
   const [savedPrompts, setSavedPrompts] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.SAVED_PROMPTS);
@@ -31,17 +57,21 @@ export function DotaProvider({ children }) {
     }
   });
 
-  // Local Storage: Recent Searches
+  // ---------------------------------------------------------------------------
+  // 4. LOCALSTORAGE STATE: RECENT SEARCHES
+  // ---------------------------------------------------------------------------
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.RECENT_SEARCHES);
-      return stored ? JSON.parse(stored) : ['Anti-Mage', 'Carry', 'Invoker', 'Axe'];
+      return stored ? JSON.parse(stored) : APP_CONFIG.defaultSearchSuggestions;
     } catch {
-      return ['Anti-Mage', 'Carry', 'Invoker', 'Axe'];
+      return APP_CONFIG.defaultSearchSuggestions;
     }
   });
 
-  // Persist Favorites
+  // ---------------------------------------------------------------------------
+  // 5. AUTOMATICALLY SYNC STATES TO LOCALSTORAGE WHENEVER THEY CHANGE
+  // ---------------------------------------------------------------------------
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(favorites));
@@ -50,7 +80,6 @@ export function DotaProvider({ children }) {
     }
   }, [favorites]);
 
-  // Persist Saved Prompts
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEYS.SAVED_PROMPTS, JSON.stringify(savedPrompts));
@@ -59,7 +88,6 @@ export function DotaProvider({ children }) {
     }
   }, [savedPrompts]);
 
-  // Persist Recent Searches
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEYS.RECENT_SEARCHES, JSON.stringify(recentSearches));
@@ -68,7 +96,9 @@ export function DotaProvider({ children }) {
     }
   }, [recentSearches]);
 
-  // Fetch Hero Data
+  // ---------------------------------------------------------------------------
+  // 6. FETCH HERO DATA FROM OPENDOTA REST API
+  // ---------------------------------------------------------------------------
   const loadHeroes = useCallback(async (forceSimulate = simulateError) => {
     setLoading(true);
     setError(null);
@@ -82,18 +112,18 @@ export function DotaProvider({ children }) {
     }
   }, [simulateError]);
 
-  // Initial load with useEffect
   useEffect(() => {
     loadHeroes(simulateError);
   }, [simulateError, loadHeroes]);
 
-  // Toggle simulate error state
+  // Toggle the "Simulate API Error" button in the Header
   const handleToggleSimulateError = () => {
-    const nextState = !simulateError;
-    setSimulateError(nextState);
+    setSimulateError((prev) => !prev);
   };
 
-  // Favorites helpers
+  // ---------------------------------------------------------------------------
+  // 7. HELPER FUNCTIONS FOR FAVORITES, PROMPTS, AND SEARCH HISTORY
+  // ---------------------------------------------------------------------------
   const toggleFavorite = (heroId) => {
     setFavorites((prev) =>
       prev.includes(heroId) ? prev.filter((id) => id !== heroId) : [...prev, heroId]
@@ -102,7 +132,6 @@ export function DotaProvider({ children }) {
 
   const isFavorite = (heroId) => favorites.includes(heroId);
 
-  // Prompts helpers
   const savePrompt = (promptItem) => {
     const newEntry = {
       id: `prompt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
@@ -121,13 +150,12 @@ export function DotaProvider({ children }) {
     setSavedPrompts([]);
   };
 
-  // Recent Searches helpers
   const addRecentSearch = (term) => {
     if (!term || !term.trim()) return;
     const cleanTerm = term.trim();
     setRecentSearches((prev) => {
       const filtered = prev.filter((s) => s.toLowerCase() !== cleanTerm.toLowerCase());
-      return [cleanTerm, ...filtered].slice(0, 8); // Keep top 8 recent
+      return [cleanTerm, ...filtered].slice(0, 8); // Keep up to 8 recent searches
     });
   };
 

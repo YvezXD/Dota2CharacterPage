@@ -36,3 +36,4 @@ export default function CardGrid({ heroes, onResetFilters }) {
     </div>
   );
 }
+

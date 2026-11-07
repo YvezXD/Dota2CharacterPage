@@ -86,3 +86,4 @@ export async function fetchHeroStats(simulateError = false) {
     throw err;
   }
 }
+

@@ -1,17 +1,33 @@
+/**
+ * ==============================================================================
+ * GLOBAL NAVIGATION HEADER (src/components/Header.jsx)
+ * ==============================================================================
+ * WHAT THIS COMPONENT DOES:
+ * Renders the top navigation bar across all pages, including:
+ * - App Logo & Title (configured in `src/config/appConfig.js`)
+ * - Navigation Links (Hero Armory, AI Prompt Forge, Codex Roster)
+ * - "Simulate API Error" toggle switch (for testing/grading error states)
+ * - "README & Git Guide" modal button
+ * - Responsive mobile menu drawer
+ *
+ * HOW TO EDIT FOR NOVICE DEVELOPERS:
+ * - To change the app name or subtitle, edit `src/config/appConfig.js`.
+ * - To add a new navigation tab, add an item to the `navLinks` array below.
+ * ==============================================================================
+ */
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDota } from '../context/DotaContext';
+import { APP_CONFIG } from '../config/appConfig';
 import {
-  ShieldAlert,
   Sparkles,
   Bookmark,
   BookOpen,
   Menu,
   X,
   Swords,
-  Layers,
   AlertTriangle,
-  RotateCw,
 } from 'lucide-react';
 
 export default function Header() {
@@ -26,12 +42,14 @@ export default function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Helper to check if a nav link is currently active
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
 
+  // Navigation items displayed in the top bar
   const navLinks = [
     { name: 'Hero Armory', path: '/', icon: Swords },
     { name: 'AI Prompt Forge', path: '/prompt-forge', icon: Sparkles, badge: 'AI Hub' },
@@ -47,7 +65,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 bg-[#0b0e14]/90 backdrop-blur-md border-b border-[#232a3b] shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo & Branding */}
+          {/* 1. Logo & Branding */}
           <Link
             to="/"
             className="flex items-center space-x-3 group transition-transform duration-200 hover:scale-[1.02]"
@@ -64,16 +82,16 @@ export default function Header() {
                   ANCIENT<span className="text-[#e2b76b]">CODEX</span>
                 </span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-widest bg-[#1c2230] text-[#e2b76b] border border-[#e2b76b]/30">
-                  v2.0
+                  v{APP_CONFIG.appVersion}
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-sans tracking-wide hidden sm:block">
-                Dota 2 Hero Analytics & AI Prompt Hub
+                {APP_CONFIG.appSubtitle}
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* 2. Desktop Navigation Links */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -105,7 +123,7 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Right Action Controls: Simulate API Error & Readme/Git Guide Modal */}
+          {/* 3. Right Action Controls: Simulate API Error & README Modal */}
           <div className="hidden lg:flex items-center space-x-3">
             {/* Simulate API Error Toggle (for Evaluators / Grading) */}
             <div
@@ -148,7 +166,7 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile menu button */}
+          {/* 4. Mobile Menu Button */}
           <div className="flex md:hidden items-center space-x-2">
             <button
               onClick={() => setIsReadmeOpen(true)}
@@ -168,7 +186,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* 5. Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0e121a] border-b border-[#232a3b] px-4 pt-3 pb-6 space-y-3">
           <nav className="flex flex-col space-y-2">

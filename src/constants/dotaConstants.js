@@ -84,3 +84,4 @@ export const STORAGE_KEYS = {
   SAVED_PROMPTS: 'ancientcodex_saved_prompts',
   RECENT_SEARCHES: 'ancientcodex_recent_searches',
 };
+
