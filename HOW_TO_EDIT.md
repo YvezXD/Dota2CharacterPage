@@ -51,3 +51,4 @@ Welcome! This project has been organized so that **even if you are brand new to 
 ### D. Change the Theme Colors
 1. Open [`src/index.css`](file:///c:/Users/USer/OneDrive/Desktop/Repository/FinalsProject/src/index.css).
 2. Edit the CSS variables at the top (`--color-obsidian`, `--color-radiant-gold`, `--color-dire-crimson`, etc.) or adjust the `.dota-card` hover border.
+
