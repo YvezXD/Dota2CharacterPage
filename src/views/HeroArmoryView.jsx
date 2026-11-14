@@ -10,10 +10,7 @@
  * - CardGrid (12 HeroCards per page) or SkeletonGrid / ErrorState
  * - Pagination controls
  *
- * HOW TO EDIT FOR NOVICE DEVELOPERS:
- * - To change how many heroes show per page, edit `heroesPerPage` in
- *   `src/config/appConfig.js`.
- * - To change how filtering or sorting works, edit `src/utils/heroFilters.js`.
+ * THEME: Black and Red with a little bit of Gold
  * ==============================================================================
  */
 
@@ -96,10 +93,10 @@ export default function HeroArmoryView() {
 
   return (
     <div className="space-y-8">
-      {/* SECTION A: Hero Armory Top Banner */}
-      <section className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#131722] via-[#1a2133] to-[#0e121a] border border-[#232a3b] p-6 sm:p-10 shadow-2xl">
+      {/* SECTION A: Hero Armory Top Banner (Black & Red with Gold Sparkle) */}
+      <section className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#170a0e] via-[#10070a] to-[#070406] border border-[#2e141a] p-6 sm:p-10 shadow-2xl">
         <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1c2230] border border-[#e2b76b]/30 text-xs font-mono text-[#e2b76b]">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1c0a0f] border border-[#e61e38]/40 text-xs font-mono text-[#ff2a44] shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-[#e2b76b]" />
             <span>OpenDota Live Statistics & AI Codex</span>
           </div>
@@ -108,29 +105,29 @@ export default function HeroArmoryView() {
             Dota 2 Hero Armory & Analytics
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-stone-300 leading-relaxed max-w-2xl">
             Explore complete competitive attributes, base stats, pro pick frequencies, and public win rates for all 127 heroes. Select any hero to forge deep tactical AI coaching and lore prompts.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-2 text-xs font-mono text-slate-400">
-            <div className="flex items-center space-x-1.5 bg-[#0b0e14]/60 px-3 py-1.5 rounded-lg border border-[#232a3b]">
-              <Swords className="w-4 h-4 text-[#e2b76b]" />
-              <span>Total Heroes: <strong className="text-white">{heroes?.length || 127}</strong></span>
+          <div className="flex flex-wrap gap-4 pt-2 text-xs font-mono text-stone-400">
+            <div className="flex items-center space-x-1.5 bg-[#0a0507]/80 px-3 py-1.5 rounded-lg border border-[#2a1318]">
+              <Swords className="w-4 h-4 text-[#e61e38]" />
+              <span>Total Heroes: <strong className="text-[#e2b76b] font-bold">{heroes?.length || 127}</strong></span>
             </div>
-            <div className="flex items-center space-x-1.5 bg-[#0b0e14]/60 px-3 py-1.5 rounded-lg border border-[#232a3b]">
-              <TrendingUp className="w-4 h-4 text-[#2ecc71]" />
+            <div className="flex items-center space-x-1.5 bg-[#0a0507]/80 px-3 py-1.5 rounded-lg border border-[#2a1318]">
+              <TrendingUp className="w-4 h-4 text-[#ff2a44]" />
               <span>Real-Time Win Rates</span>
             </div>
-            <div className="flex items-center space-x-1.5 bg-[#0b0e14]/60 px-3 py-1.5 rounded-lg border border-[#232a3b]">
-              <ShieldCheck className="w-4 h-4 text-[#00d2ff]" />
+            <div className="flex items-center space-x-1.5 bg-[#0a0507]/80 px-3 py-1.5 rounded-lg border border-[#2a1318]">
+              <ShieldCheck className="w-4 h-4 text-[#ff3b53]" />
               <span>Steam CDN Accelerated</span>
             </div>
           </div>
         </div>
 
-        {/* Decorative Background Glows */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#e2b76b]/10 blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#ff4b4b]/10 blur-3xl rounded-full pointer-events-none" />
+        {/* Decorative Background Crimson Glows */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#e61e38]/12 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#ff2a44]/10 blur-3xl rounded-full pointer-events-none" />
       </section>
 
       {/* SECTION B: Search Bar & Filter Controls */}

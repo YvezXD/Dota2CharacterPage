@@ -10,12 +10,7 @@
  *   3. `/prompt-forge` -> PromptForgeView (Dota 2 AI Prompt Generator)
  *   4. `/favorites`    -> FavoritesView   (Saved Roster & Prompts)
  *
- * HOW TO EDIT FOR NOVICE DEVELOPERS:
- * - To add a new page:
- *   1. Create your new page file inside `src/views/`.
- *   2. Import it below.
- *   3. Add a `<Route path="/your-path" element={<YourNewView />} />` inside `<Routes>`.
- *   4. Add a navigation link to `navLinks` inside `src/components/Header.jsx`.
+ * THEME: Black & Red with subtle Gold accents
  * ==============================================================================
  */
 
@@ -36,7 +31,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <DotaProvider>
-        <div className="min-h-screen flex flex-col bg-[#0b0e14] text-slate-100 selection:bg-[#e2b76b] selection:text-black font-sans">
+        <div className="min-h-screen flex flex-col bg-[#06070a] text-slate-100 selection:bg-[#e61e38] selection:text-white font-sans">
           {/* Top Navigation Bar */}
           <Header />
 

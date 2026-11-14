@@ -48,18 +48,20 @@ export const APP_CONFIG = {
     recentSearches: 'ancientcodex_recent_searches',
   },
 
-  // 6. Color Theme Reference (Dota 2 Aesthetic)
+  // 6. Color Theme Reference (Black and Red with a Little Bit of Gold)
   themeColors: {
-    backgroundObsidian: '#0b0e14',
-    cardSlate: '#131722',
+    backgroundObsidian: '#06070a',
+    cardBlack: '#0e0d12',
+    crimsonPrimary: '#e61e38',
+    crimsonBright: '#ff2a44',
+    crimsonDark: '#991b1b',
     radiantGold: '#e2b76b',
-    direCrimson: '#ff4b4b',
-    attributeStrength: '#ec3d3d',
+    goldAccent: '#d4af37',
+    attributeStrength: '#ff3344',
     attributeAgility: '#2ecc71',
     attributeIntelligence: '#00d2ff',
-    attributeUniversal: '#df53f3',
+    attributeUniversal: '#c084fc',
   },
 };
 
 export default APP_CONFIG;
-

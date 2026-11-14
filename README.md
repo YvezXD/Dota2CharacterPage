@@ -133,16 +133,16 @@ src/
     └── PromptForgeView.jsx  # /prompt-forge (Generative AI prompt builder)
 ```
 
-### Visual Palette:
-- **Obsidian Dark Background**: `#0b0e14`
-- **Slate Card Surfaces**: `#131722`
-- **Card Borders & Hover**: `#232a3b` / `#2e374d`
-- **Radiant Gold Accents**: `#e2b76b`
-- **Dire Crimson Highlights**: `#ff4b4b`
-- **Strength Red**: `#ec3d3d`
+### Visual Palette (Black & Red with subtle Gold accents):
+- **Obsidian Dark Void Background**: `#06070a`
+- **Dark Charcoal Card Surfaces**: `#0e0d12`
+- **Crimson Card Borders & Hover**: `#2a1419` / `#e61e38`
+- **Primary Dire Crimson**: `#e61e38` / `#ff2a44`
+- **Radiant Gold Accents**: `#e2b76b` / `#d4af37`
+- **Strength Red**: `#ff3344`
 - **Agility Green**: `#2ecc71`
 - **Intelligence Cyan**: `#00d2ff`
-- **Universal Purple**: `#df53f3`
+- **Universal Purple**: `#c084fc`
 
 ---
 

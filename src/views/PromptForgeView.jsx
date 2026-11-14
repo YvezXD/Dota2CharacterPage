@@ -7,9 +7,7 @@
  * Lets users pick a Hero, Role/Lane, Patch Playstyle, and Prompt Type, then
  * dynamically builds a copyable AI prompt and lets users save it to `localStorage`.
  *
- * HOW TO EDIT FOR NOVICE DEVELOPERS:
- * - To edit the generated prompt text, open `src/utils/promptTemplates.js`.
- * - To add/edit lanes, playstyles, or prompt types, open `src/constants/dotaConstants.js`.
+ * THEME: Black and Red with a little bit of Gold
  * ==============================================================================
  */
 
@@ -113,11 +111,11 @@ export default function PromptForgeView() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      {/* SECTION A: Top Header Banner */}
-      <section className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#131722] via-[#1a2133] to-[#0e121a] border border-[#e2b76b]/30 p-6 sm:p-10 shadow-2xl">
+      {/* SECTION A: Top Header Banner (Black & Red with Gold Sparkle) */}
+      <section className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#170a0e] via-[#10070a] to-[#070406] border border-[#e61e38]/40 p-6 sm:p-10 shadow-2xl">
         <div className="relative z-10 max-w-3xl space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1c2230] border border-[#e2b76b]/40 text-xs font-mono text-[#e2b76b]">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1c0a0f] border border-[#e61e38]/40 text-xs font-mono text-[#ff2a44] shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#e2b76b]" />
             <span>AI Prompt Generator Hub</span>
           </div>
 
@@ -125,39 +123,39 @@ export default function PromptForgeView() {
             Dota 2 AI Prompt Forge
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-stone-300 leading-relaxed max-w-2xl">
             Engineer customized, high-precision AI prompts for LLMs (Claude, ChatGPT, Gemini) and image synthesis models (Midjourney, DALL-E) dynamically tailored with live OpenDota analytics.
           </p>
         </div>
 
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#e2b76b]/15 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#e61e38]/12 blur-3xl rounded-full pointer-events-none" />
       </section>
 
       {/* SECTION B: Two-Column Builder Interface */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* LEFT COLUMN (5 cols): Hero, Lane, Playstyle & Prompt Type Selectors */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-[#131722] border border-[#232a3b] space-y-5">
-            <h2 className="text-sm font-serif font-bold text-white uppercase tracking-wider flex items-center space-x-2 border-b border-[#232a3b] pb-3">
+          <div className="p-6 rounded-2xl bg-[#0e0d12] border border-[#2a1419] space-y-5 shadow-xl">
+            <h2 className="text-sm font-serif font-bold text-white uppercase tracking-wider flex items-center space-x-2 border-b border-[#2a1419] pb-3">
               <Sparkles className="w-4 h-4 text-[#e2b76b]" />
               <span>1. Choose Hero & Parameters</span>
             </h2>
 
             {/* Hero Dropdown */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
+              <label className="block text-xs font-mono text-stone-400 uppercase tracking-wider">
                 Select Dota 2 Hero:
               </label>
               {loading ? (
-                <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 p-2.5 bg-[#1c2230] rounded-xl">
-                  <Loader2 className="w-4 h-4 animate-spin text-[#e2b76b]" />
+                <div className="flex items-center space-x-2 text-xs font-mono text-stone-400 p-2.5 bg-[#140a0e] rounded-xl">
+                  <Loader2 className="w-4 h-4 animate-spin text-[#e61e38]" />
                   <span>Loading heroes from OpenDota...</span>
                 </div>
               ) : (
                 <select
                   value={selectedHeroId}
                   onChange={(e) => setSelectedHeroId(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#1c2230] border border-[#2e374d] text-white text-sm focus:outline-none focus:border-[#e2b76b]"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#140a0e] border border-[#2e141a] text-white text-sm focus:outline-none focus:border-[#e61e38]"
                 >
                   {heroes.map((hero) => (
                     <option key={hero.id} value={hero.id}>
@@ -170,27 +168,27 @@ export default function PromptForgeView() {
 
             {/* Selected Hero Mini Summary Card */}
             {currentHero && (
-              <div className="flex items-center space-x-3 p-3 rounded-xl bg-[#0b0e14] border border-[#232a3b]">
+              <div className="flex items-center space-x-3 p-3 rounded-xl bg-[#070406] border border-[#2a1419]">
                 <img
                   src={currentHero.avatarUrl}
                   alt={currentHero.localized_name}
-                  className="w-14 h-14 rounded-lg object-cover border border-[#2e374d]"
+                  className="w-14 h-14 rounded-lg object-cover border border-[#36151f]"
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <h4 className="text-sm font-bold text-white truncate">
                       {currentHero.localized_name}
                     </h4>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#1c2230] text-[#e2b76b]">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#160a0e] text-[#ff3b53] border border-[#e61e38]/30">
                       Win: {currentHero.pubWinRate}%
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400 truncate mt-0.5">
+                  <p className="text-xs text-stone-400 truncate mt-0.5">
                     {currentHero.roles?.join(', ')}
                   </p>
                   <Link
                     to={`/hero/${currentHero.id}`}
-                    className="inline-flex items-center space-x-1 text-[11px] text-[#00d2ff] hover:underline mt-1"
+                    className="inline-flex items-center space-x-1 text-[11px] text-[#e2b76b] hover:underline mt-1"
                   >
                     <span>View full hero codex</span>
                     <ArrowRight className="w-2.5 h-2.5" />
@@ -201,13 +199,13 @@ export default function PromptForgeView() {
 
             {/* Position / Lane Dropdown */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
+              <label className="block text-xs font-mono text-stone-400 uppercase tracking-wider">
                 Position & Lane Assignment:
               </label>
               <select
                 value={selectedLane}
                 onChange={(e) => setSelectedLane(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-xl bg-[#1c2230] border border-[#2e374d] text-white text-sm focus:outline-none focus:border-[#e2b76b]"
+                className="w-full py-2.5 px-3 rounded-xl bg-[#140a0e] border border-[#2e141a] text-white text-sm focus:outline-none focus:border-[#e61e38]"
               >
                 {LANES_AND_ROLES.map((lane) => (
                   <option key={lane} value={lane}>
@@ -219,13 +217,13 @@ export default function PromptForgeView() {
 
             {/* Playstyle Dropdown */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-mono text-slate-400 uppercase tracking-wider">
+              <label className="block text-xs font-mono text-stone-400 uppercase tracking-wider">
                 Strategic Win Condition / Playstyle:
               </label>
               <select
                 value={selectedPlaystyle}
                 onChange={(e) => setSelectedPlaystyle(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-xl bg-[#1c2230] border border-[#2e374d] text-white text-sm focus:outline-none focus:border-[#e2b76b]"
+                className="w-full py-2.5 px-3 rounded-xl bg-[#140a0e] border border-[#2e141a] text-white text-sm focus:outline-none focus:border-[#e61e38]"
               >
                 {PLAYSTYLES.map((style) => (
                   <option key={style} value={style}>
@@ -237,9 +235,9 @@ export default function PromptForgeView() {
           </div>
 
           {/* Prompt Archetype Buttons */}
-          <div className="p-6 rounded-2xl bg-[#131722] border border-[#232a3b] space-y-4">
-            <h2 className="text-sm font-serif font-bold text-white uppercase tracking-wider flex items-center space-x-2 border-b border-[#232a3b] pb-3">
-              <BrainCircuit className="w-4 h-4 text-[#e2b76b]" />
+          <div className="p-6 rounded-2xl bg-[#0e0d12] border border-[#2a1419] space-y-4 shadow-xl">
+            <h2 className="text-sm font-serif font-bold text-white uppercase tracking-wider flex items-center space-x-2 border-b border-[#2a1419] pb-3">
+              <BrainCircuit className="w-4 h-4 text-[#e61e38]" />
               <span>2. Select AI Prompt Archetype</span>
             </h2>
 
@@ -252,19 +250,19 @@ export default function PromptForgeView() {
                     onClick={() => setSelectedType(type.id)}
                     className={`p-3.5 rounded-xl text-left border transition-all ${
                       isSelected
-                        ? 'bg-[#1c2230] border-[#e2b76b] shadow-[0_0_15px_rgba(226,183,107,0.15)] ring-1 ring-[#e2b76b]'
-                        : 'bg-[#0f121a] border-[#232a3b] hover:border-slate-500 text-slate-300'
+                        ? 'bg-[#1c0a0f] border-[#e61e38] shadow-[0_0_18px_rgba(230,30,56,0.3)] ring-1 ring-[#e61e38]'
+                        : 'bg-[#0a0608] border-[#2a1419] hover:border-red-900/60 text-stone-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-bold text-sm text-white">
                         {type.name}
                       </span>
-                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-[#131722] text-[#e2b76b] border border-[#e2b76b]/30">
+                      <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-[#12080a] text-[#e2b76b] border border-[#e2b76b]/35">
                         {type.badge}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">
+                    <p className="text-xs text-stone-400 leading-relaxed">
                       {type.desc}
                     </p>
                   </button>
@@ -276,18 +274,18 @@ export default function PromptForgeView() {
 
         {/* RIGHT COLUMN (7 cols): Live Prompt Output, Copy & Save */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="p-6 rounded-2xl bg-[#131722] border border-[#232a3b] flex flex-col h-full shadow-xl">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#232a3b]">
+          <div className="p-6 rounded-2xl bg-[#0e0d12] border border-[#2a1419] flex flex-col h-full shadow-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#2a1419]">
               <div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-serif font-bold text-white uppercase tracking-wider">
                     Generated Prompt Output
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-800 font-mono">
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-red-950/70 text-red-200 border border-red-800 font-mono">
                     Ready for AI
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 font-mono mt-0.5">
+                <p className="text-xs text-stone-400 font-mono mt-0.5">
                   Formatted for ChatGPT, Claude, Gemini, or Midjourney v6
                 </p>
               </div>
@@ -295,7 +293,7 @@ export default function PromptForgeView() {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={handleCopy}
-                  className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#1c2230] hover:bg-[#252f44] text-white border border-[#2e374d] hover:border-[#e2b76b] transition-all shadow-sm"
+                  className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-[#160a0e] hover:bg-[#220d14] text-white border border-[#2e141a] hover:border-[#e61e38] transition-all shadow-sm"
                   title="Copy prompt text to clipboard"
                 >
                   {copied ? (
@@ -313,10 +311,10 @@ export default function PromptForgeView() {
 
                 <button
                   onClick={handleSavePrompt}
-                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#e2b76b] to-[#ff4b4b] text-black hover:brightness-110 shadow-[0_0_15px_rgba(226,183,107,0.3)] transition-all"
+                  className="flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#e61e38] to-[#991b1b] text-white hover:brightness-110 shadow-[0_0_18px_rgba(230,30,56,0.4)] border border-[#ff3b53]/50 transition-all"
                   title="Save prompt to your Codex Roster in localStorage"
                 >
-                  <BookmarkPlus className="w-3.5 h-3.5 text-black" />
+                  <BookmarkPlus className="w-3.5 h-3.5 text-[#e2b76b]" />
                   <span>{savedSuccess ? 'Saved to Codex!' : 'Save to Codex'}</span>
                 </button>
               </div>
@@ -327,14 +325,14 @@ export default function PromptForgeView() {
                 readOnly
                 value={generatedPrompt}
                 rows={16}
-                className="w-full h-full p-4 rounded-xl bg-[#090b10] border border-[#232a3b] text-slate-200 font-mono text-xs sm:text-sm leading-relaxed resize-none focus:outline-none focus:border-[#e2b76b]"
+                className="w-full h-full p-4 rounded-xl bg-[#060304] border border-[#2a1419] text-stone-200 font-mono text-xs sm:text-sm leading-relaxed resize-none focus:outline-none focus:border-[#e61e38]"
               />
             </div>
 
-            <div className="mt-4 pt-3 border-t border-[#1c2230] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+            <div className="mt-4 pt-3 border-t border-[#1c0d12] flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-2">
               <span className="flex items-center space-x-1">
                 <span>💡 Tip:</span>
-                <span className="text-slate-300">
+                <span className="text-stone-300">
                   Paste directly into any LLM or image generator for instant output.
                 </span>
               </span>

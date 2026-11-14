@@ -1,15 +1,32 @@
-export const STEAM_CDN_BASE = 'https://cdn.cloudflare.steamstatic.com';
+/**
+ * ==============================================================================
+ * DOTA 2 CONSTANTS & ENUMS
+ * ==============================================================================
+ * Central repository for Dota 2 gameplay options, attributes, sorting methods,
+ * roles, and AI prompt archetypes.
+ *
+ * THEME: Black & Red with subtle Gold accents
+ * ==============================================================================
+ */
 
+import { APP_CONFIG } from '../config/appConfig';
+
+// Steam Content Delivery Network (CDN) for official Dota 2 hero portraits
+export const STEAM_CDN_BASE = APP_CONFIG.api.steamCdnBaseUrl;
+
+// Dota 2 Primary Attributes (Strength, Agility, Intelligence, Universal)
 export const PRIMARY_ATTRIBUTES = [
-  { id: 'all', label: 'All Attributes', short: 'ALL', color: '#e2b76b', bg: 'rgba(226, 183, 107, 0.15)' },
-  { id: 'str', label: 'Strength', short: 'STR', color: '#ec3d3d', bg: 'rgba(236, 61, 61, 0.15)' },
+  { id: 'all', label: 'All Attributes', short: 'ALL', color: '#e61e38', bg: 'rgba(230, 30, 56, 0.15)' },
+  { id: 'str', label: 'Strength', short: 'STR', color: '#ff3344', bg: 'rgba(255, 51, 68, 0.15)' },
   { id: 'agi', label: 'Agility', short: 'AGI', color: '#2ecc71', bg: 'rgba(46, 204, 113, 0.15)' },
   { id: 'int', label: 'Intelligence', short: 'INT', color: '#00d2ff', bg: 'rgba(0, 210, 255, 0.15)' },
-  { id: 'all_attr', label: 'Universal', key: 'all', short: 'UNI', color: '#df53f3', bg: 'rgba(223, 83, 243, 0.15)' },
+  { id: 'all_attr', label: 'Universal', key: 'all', short: 'UNI', color: '#c084fc', bg: 'rgba(192, 132, 252, 0.15)' },
 ];
 
+// Attack Range Types
 export const ATTACK_TYPES = ['All', 'Melee', 'Ranged'];
 
+// Dota 2 Official Roles
 export const DOTA_ROLES = [
   'Carry',
   'Support',
@@ -21,6 +38,7 @@ export const DOTA_ROLES = [
   'Pusher',
 ];
 
+// Available Sorting Options for the Hero Armory
 export const SORT_OPTIONS = [
   { value: 'name_asc', label: 'Name (A to Z)' },
   { value: 'name_desc', label: 'Name (Z to A)' },
@@ -31,6 +49,7 @@ export const SORT_OPTIONS = [
   { value: 'str_desc', label: 'Base Strength (Highest First)' },
 ];
 
+// Position & Lane assignments used in AI Prompt Generator
 export const LANES_AND_ROLES = [
   'Safe Lane Carry (Pos 1)',
   'Mid Lane Tempo / Playmaker (Pos 2)',
@@ -39,6 +58,7 @@ export const LANES_AND_ROLES = [
   'Hard Support Lane Protector (Pos 5)',
 ];
 
+// Playstyles used in the AI Prompt Generator
 export const PLAYSTYLES = [
   'Early Tower Pressure & Fast Aggression',
   'Late-Game Hypercarry 6-Slot Scaling',
@@ -48,6 +68,7 @@ export const PLAYSTYLES = [
   'Pickoff Assassin & Smoke Roaming',
 ];
 
+// Prompt Generator Archetypes
 export const PROMPT_TYPES = [
   {
     id: 'coaching',
@@ -79,9 +100,9 @@ export const PROMPT_TYPES = [
   },
 ];
 
+// LocalStorage Keys (imported from central config)
 export const STORAGE_KEYS = {
-  FAVORITES: 'ancientcodex_favorite_heroes',
-  SAVED_PROMPTS: 'ancientcodex_saved_prompts',
-  RECENT_SEARCHES: 'ancientcodex_recent_searches',
+  FAVORITES: APP_CONFIG.storageKeys.favorites,
+  SAVED_PROMPTS: APP_CONFIG.storageKeys.savedPrompts,
+  RECENT_SEARCHES: APP_CONFIG.storageKeys.recentSearches,
 };
-
