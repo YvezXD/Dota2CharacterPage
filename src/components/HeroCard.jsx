@@ -46,21 +46,23 @@ export default function HeroCard({ hero }) {
   };
 
   // 2. Determine Win Rate color coding (High: #ff2a44 Crimson, Medium: #e2b76b Gold, Low: #991b1b Dark Red)
-  const winRate = hero.pubWinRate || 0;
+  // Switch between hero.turboWinRate or hero.pubWinRate
+  const winRate = hero.turboWinRate || 0;
   const isHighWinRate = winRate >= 51.5;
   const isLowWinRate = winRate < 48.0;
+
 
   const winRateColor = isHighWinRate
     ? 'text-[#ff2a44]'
     : isLowWinRate
-    ? 'text-red-400'
-    : 'text-[#e2b76b]';
+      ? 'text-red-400'
+      : 'text-[#e2b76b]';
 
   const winRateBg = isHighWinRate
     ? 'bg-[#ff2a44]'
     : isLowWinRate
-    ? 'bg-[#991b1b]'
-    : 'bg-[#e2b76b]';
+      ? 'bg-[#991b1b]'
+      : 'bg-[#e2b76b]';
 
   return (
     <div className="group rounded-xl overflow-hidden bg-[#0e0d12] border border-[#2a1419] hover:border-[#e61e38] hover:shadow-[0_12px_32px_rgba(0,0,0,0.9),0_0_22px_rgba(230,30,56,0.3)] transition-all duration-300 flex flex-col justify-between relative">
@@ -110,11 +112,10 @@ export default function HeroCard({ hero }) {
             e.stopPropagation();
             toggleFavorite(hero.id);
           }}
-          className={`absolute top-3 right-3 p-2 rounded-lg backdrop-blur-md transition-all shadow-md ${
-            favorited
+          className={`absolute top-3 right-3 p-2 rounded-lg backdrop-blur-md transition-all shadow-md ${favorited
               ? 'bg-[#e2b76b] text-black shadow-[0_0_15px_rgba(226,183,107,0.6)] scale-105'
               : 'bg-black/70 text-stone-300 hover:text-[#e2b76b] hover:bg-black/90'
-          }`}
+            }`}
           title={favorited ? 'Remove from Codex Roster' : 'Bookmark to Codex Roster'}
         >
           <Star className={`w-4 h-4 ${favorited ? 'fill-current' : ''}`} />
@@ -166,7 +167,7 @@ export default function HeroCard({ hero }) {
           <div className="flex items-center justify-between text-xs">
             <span className="text-stone-400 flex items-center space-x-1">
               <Activity className="w-3.5 h-3.5 text-stone-500" />
-              <span>Public Win Rate</span>
+              <span>Turbo Win Rate</span>
             </span>
             <span className={`font-mono font-bold ${winRateColor}`}>
               {winRate > 0 ? `${winRate}%` : 'N/A'}
@@ -182,7 +183,7 @@ export default function HeroCard({ hero }) {
 
           <div className="flex items-center justify-between text-[11px] text-stone-400 pt-0.5">
             <span>Pro Picks: <strong className="text-stone-200">{hero.pro_pick || 0}</strong></span>
-            <span>Turbo Win: <strong className="text-stone-200">{hero.turboWinRate}%</strong></span>
+            <span>Pub Win: <strong className="text-stone-200">{hero.pubWinRate}%</strong></span>
           </div>
         </div>
 
