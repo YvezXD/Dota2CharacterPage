@@ -46,13 +46,22 @@ export default function SkeletonGrid({ count = 12 }) {
                 </div>
               </div>
 
-              {/* Win rate bar placeholder */}
-              <div className="space-y-1.5">
-                <div className="flex justify-between">
-                  <div className="h-3 w-16 bg-stone-900 rounded" />
-                  <div className="h-3 w-10 bg-stone-900 rounded" />
+              {/* Dual win rate bars placeholder */}
+              <div className="space-y-2">
+                <div className="space-y-1">
+                  <div className="flex justify-between">
+                    <div className="h-3 w-16 bg-stone-900 rounded" />
+                    <div className="h-3 w-10 bg-stone-900 rounded" />
+                  </div>
+                  <div className="h-1.5 w-full bg-stone-900 rounded-full" />
                 </div>
-                <div className="h-2 w-full bg-stone-900 rounded-full" />
+                <div className="space-y-1">
+                  <div className="flex justify-between">
+                    <div className="h-3 w-16 bg-stone-900 rounded" />
+                    <div className="h-3 w-10 bg-stone-900 rounded" />
+                  </div>
+                  <div className="h-1.5 w-full bg-stone-900 rounded-full" />
+                </div>
               </div>
 
               {/* Action Buttons Placeholder */}

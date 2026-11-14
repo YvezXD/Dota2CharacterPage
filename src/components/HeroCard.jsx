@@ -25,6 +25,7 @@ import {
   Target,
   Shield,
   Activity,
+  Flame,
   ArrowRight,
 } from 'lucide-react';
 import { useDota } from '../context/DotaContext';
@@ -45,24 +46,19 @@ export default function HeroCard({ hero }) {
     bg: 'rgba(230, 30, 56, 0.15)',
   };
 
-  // 2. Determine Win Rate color coding (High: #ff2a44 Crimson, Medium: #e2b76b Gold, Low: #991b1b Dark Red)
-  // Switch between hero.turboWinRate or hero.pubWinRate
-  const winRate = hero.turboWinRate || 0;
-  const isHighWinRate = winRate >= 51.5;
-  const isLowWinRate = winRate < 48.0;
+  // 2. Public Win Rate Color Coding
+  const pubWinRate = hero.pubWinRate || 0;
+  const isHighPub = pubWinRate >= 51.5;
+  const isLowPub = pubWinRate < 48.0;
+  const pubWinRateColor = isHighPub ? 'text-[#ff2a44]' : isLowPub ? 'text-red-400' : 'text-[#e2b76b]';
+  const pubWinRateBg = isHighPub ? 'bg-[#ff2a44]' : isLowPub ? 'bg-[#991b1b]' : 'bg-[#e2b76b]';
 
-
-  const winRateColor = isHighWinRate
-    ? 'text-[#ff2a44]'
-    : isLowWinRate
-      ? 'text-red-400'
-      : 'text-[#e2b76b]';
-
-  const winRateBg = isHighWinRate
-    ? 'bg-[#ff2a44]'
-    : isLowWinRate
-      ? 'bg-[#991b1b]'
-      : 'bg-[#e2b76b]';
+  // 3. Turbo Win Rate Color Coding
+  const turboWinRate = hero.turboWinRate || 0;
+  const isHighTurbo = turboWinRate >= 51.5;
+  const isLowTurbo = turboWinRate < 48.0;
+  const turboWinRateColor = isHighTurbo ? 'text-[#ff2a44]' : isLowTurbo ? 'text-red-400' : 'text-[#e2b76b]';
+  const turboWinRateBg = isHighTurbo ? 'bg-[#ff2a44]' : isLowTurbo ? 'bg-[#991b1b]' : 'bg-[#e2b76b]';
 
   return (
     <div className="group rounded-xl overflow-hidden bg-[#0e0d12] border border-[#2a1419] hover:border-[#e61e38] hover:shadow-[0_12px_32px_rgba(0,0,0,0.9),0_0_22px_rgba(230,30,56,0.3)] transition-all duration-300 flex flex-col justify-between relative">
@@ -162,28 +158,52 @@ export default function HeroCard({ hero }) {
           </div>
         </div>
 
-        {/* Win Rate & Pick Rate Meter */}
-        <div className="space-y-1.5 pt-2 border-t border-[#1c0d12]">
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-stone-400 flex items-center space-x-1">
-              <Activity className="w-3.5 h-3.5 text-stone-500" />
-              <span>Turbo Win Rate</span>
-            </span>
-            <span className={`font-mono font-bold ${winRateColor}`}>
-              {winRate > 0 ? `${winRate}%` : 'N/A'}
-            </span>
+        {/* Win Rate Meters: Both Public & Turbo Win Rates */}
+        <div className="space-y-2 pt-2 border-t border-[#1c0d12]">
+          {/* 1. Public Win Rate Bar */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-stone-400 flex items-center space-x-1">
+                <Activity className="w-3.5 h-3.5 text-[#ff2a44]" />
+                <span>Public Win Rate</span>
+              </span>
+              <span className={`font-mono font-bold ${pubWinRateColor}`}>
+                {pubWinRate > 0 ? `${pubWinRate}%` : 'N/A'}
+              </span>
+            </div>
+
+            <div className="w-full h-1.5 rounded-full bg-stone-900 overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-700 ${pubWinRateBg}`}
+                style={{ width: `${Math.min(Math.max(pubWinRate, 5), 100)}%` }}
+              />
+            </div>
           </div>
 
-          <div className="w-full h-1.5 rounded-full bg-stone-900 overflow-hidden">
-            <div
-              className={`h-full rounded-full transition-all duration-700 ${winRateBg}`}
-              style={{ width: `${Math.min(Math.max(winRate, 5), 100)}%` }}
-            />
+          {/* 2. Turbo Win Rate Bar */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-stone-400 flex items-center space-x-1">
+                <Flame className="w-3.5 h-3.5 text-[#e2b76b]" />
+                <span>Turbo Win Rate</span>
+              </span>
+              <span className={`font-mono font-bold ${turboWinRateColor}`}>
+                {turboWinRate > 0 ? `${turboWinRate}%` : 'N/A'}
+              </span>
+            </div>
+
+            <div className="w-full h-1.5 rounded-full bg-stone-900 overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-700 ${turboWinRateBg}`}
+                style={{ width: `${Math.min(Math.max(turboWinRate, 5), 100)}%` }}
+              />
+            </div>
           </div>
 
+          {/* Quick Competitive Summary */}
           <div className="flex items-center justify-between text-[11px] text-stone-400 pt-0.5">
             <span>Pro Picks: <strong className="text-stone-200">{hero.pro_pick || 0}</strong></span>
-            <span>Pub Win: <strong className="text-stone-200">{hero.pubWinRate}%</strong></span>
+            <span>Matches: <strong className="text-stone-200">{(hero.pub_pick || 0).toLocaleString()}</strong></span>
           </div>
         </div>
 
